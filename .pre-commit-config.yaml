@@ -1,0 +1,23 @@
+repos:
+- repo: https://github.com/astral-sh/ruff-pre-commit
+  rev: v0.11.2
+  hooks:
+    - id: ruff-format
+      types_or: [python, jupyter]
+    - id: ruff
+      args: [--fix]
+      types_or: [python, jupyter]
+
+- repo: local
+  hooks:
+    - id: clean-jupyter
+      name: Clean Jupyter Notebooks
+      entry: jupyter nbconvert --clear-output --inplace
+      language: system
+      files: \.ipynb$
+      
+    - id: pyright
+      name: Pyright type checking
+      entry: pyright
+      language: system
+      types: [python]
